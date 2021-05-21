@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/adminFragment">
+
+    <fragment
+        android:id="@+id/qlhocsinhFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qlHocSinhFragment"
+        android:label="qlHocSinhFragment"
+        tools:layout="@layout/fragment_qlhocsinh"/>
+    <fragment
+        android:id="@+id/qlthongbaoFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qlThongBaoFragment"
+        android:label="qlThongBaoFragment"
+        tools:layout="@layout/fragment_qlthongbao"/>
+    <fragment
+        android:id="@+id/qllophocFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qlLopHocFragment"
+        android:label="qlLopHocFragment"
+        tools:layout="@layout/fragment_qllophoc"/>
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.hoanle.solienlaccc.fragments.AdminFragment"
+        android:label="AdminFragment"
+        tools:layout="@layout/fragment_admin_home">
+        <action
+            android:id="@+id/action_adminFragment_to_qlhocsinhFragment"
+            app:destination="@id/qlhocsinhFragment" />
+        <action
+            android:id="@+id/action_adminFragment_to_qlthongbaoFragment"
+            app:destination="@id/qlthongbaoFragment" />
+        <action
+            android:id="@+id/action_adminFragment_to_qllophocFragment"
+            app:destination="@id/qllophocFragment" />
+    </fragment>
+
+</navigation>

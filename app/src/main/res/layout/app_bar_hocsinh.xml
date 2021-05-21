@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomephuhuynhActivity">
+    tools:context=".HomehocsinhActivity">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,7 +51,7 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginTop="50dp"
-                    android:src="@drawable/phuhuynh" />
+                    android:src="@drawable/hocsinh" />
 
                 <TextView
                     android:layout_width="153dp"
@@ -59,7 +59,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="100dp"
                     android:fontFamily="@font/autour_one"
-                    android:text="phụ huynh"
+                    android:text="Hoc Sinh"
                     android:textAlignment="center"
                     android:textColor="@color/red"
                     android:textSize="20dp"
@@ -68,7 +68,7 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <include
-            layout="@layout/content_main" />
+            layout="@layout/content_hocsinh" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

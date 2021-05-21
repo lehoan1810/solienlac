@@ -2,10 +2,13 @@ package com.hoanle.solienlaccc.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,11 +44,6 @@ public class XemDiemFragment extends Fragment {
         xemdiemMons.add(new XemdiemMon("Thiết kế OOP",R.drawable.monhoc));
         listViewMonhoc=view.findViewById(R.id.listViewMonhoc);
         adapter = new XemdiemMonAdapter(getActivity(),R.layout.dong_monhoc, xemdiemMons);
-        //arrayAdapter=new ArrayAdapter(getActivity(), R.layout.dong_monhoc, list);
-//        xemdiemMons=new ArrayList<>();
-
         listViewMonhoc.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
- //       listViewMonhoc.setAdapter(arrayAdapter);
     }
 }

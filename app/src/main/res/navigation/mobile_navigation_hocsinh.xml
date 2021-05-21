@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/hocsinhFragment">
+
+    <fragment
+        android:id="@+id/xemdiemFragment"
+        android:name="com.hoanle.solienlaccc.fragments.XemDiemFragment"
+        android:label="hsXemDiemFragment"
+        tools:layout="@layout/fragment_xem_diem"/>
+    <fragment
+        android:id="@+id/thongbaoFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ThongBaoFragment"
+        android:label="hsThongBaoFragment"
+        tools:layout="@layout/fragment_thongbao"/>
+    <fragment
+        android:id="@+id/tkbFragment"
+        android:name="com.hoanle.solienlaccc.fragments.TKBFragment"
+        android:label="hsTKBFragment"
+        tools:layout="@layout/fragment_tkb"/>
+    <fragment
+        android:id="@+id/hocsinhFragment"
+        android:name="com.hoanle.solienlaccc.fragments.HocSinhFragment"
+        android:label="HocSinhFragment"
+        tools:layout="@layout/fragment_hocsinh_home">
+        <action
+            android:id="@+id/action_hocsinhFragment_to_xemdiemFragment"
+            app:destination="@id/xemdiemFragment" />
+        <action
+            android:id="@+id/action_hocsinhFragment_to_thongbaoFragment"
+            app:destination="@id/thongbaoFragment" />
+        <action
+            android:id="@+id/action_hocsinhFragment_to_tkbFragment"
+            app:destination="@id/tkbFragment" />
+    </fragment>
+
+</navigation>

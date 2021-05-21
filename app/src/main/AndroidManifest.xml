@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Solienlaccc">
         <activity
-            android:name=".HomephuhuynhActivity"
+            android:name=".HomehocsinhActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Solienlaccc.NoActionBar">
             <intent-filter>

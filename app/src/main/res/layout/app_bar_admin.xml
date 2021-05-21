@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomephuhuynhActivity">
+    tools:context=".HomeadminActivity">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_admin"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
@@ -48,10 +48,10 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_marginTop="50dp"
-                    android:src="@drawable/phuhuynh" />
+                    android:src="@drawable/admin" />
 
                 <TextView
                     android:layout_width="153dp"
@@ -59,7 +59,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="100dp"
                     android:fontFamily="@font/autour_one"
-                    android:text="phụ huynh"
+                    android:text="Admin"
                     android:textAlignment="center"
                     android:textColor="@color/red"
                     android:textSize="20dp"
@@ -68,7 +68,7 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <include
-            layout="@layout/content_main" />
+            layout="@layout/content_admin" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
