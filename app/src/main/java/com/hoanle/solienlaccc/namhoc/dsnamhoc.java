@@ -1,28 +1,37 @@
 package com.hoanle.solienlaccc.namhoc;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.hoanle.solienlaccc.R;
 
-public class dsnamhoc extends AppCompatActivity {
+public class dsnamhoc extends Fragment {
     EditText editnamhoc;
     EditText edithocki;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_xem_diem);
-        editnamhoc=findViewById(R.id.edtNam);
-        edithocki=findViewById(R.id.edtHocki);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_namhoc, container, false);
+        editnamhoc=root.findViewById(R.id.edtNam);
+        edithocki=root.findViewById(R.id.edtHocki);
         editnamhoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "it works", Toast.LENGTH_SHORT).show();
                 MenuPopup();
             }
         });
@@ -32,11 +41,12 @@ public class dsnamhoc extends AppCompatActivity {
                 MenuHockiPopup();
             }
         });
-
+        return root;
     }
+
     private void MenuPopup()
     {
-        PopupMenu popupMenu=new PopupMenu(this,editnamhoc);
+        PopupMenu popupMenu=new PopupMenu(getContext(),editnamhoc);
         popupMenu.getMenuInflater().inflate(R.menu.menu_namhoc,popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -59,7 +69,7 @@ public class dsnamhoc extends AppCompatActivity {
     }
     private void MenuHockiPopup()
     {
-        PopupMenu popupMenu=new PopupMenu(this,edithocki);
+        PopupMenu popupMenu=new PopupMenu(getContext(),edithocki);
         popupMenu.getMenuInflater().inflate(R.menu.menu_hocki,popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
