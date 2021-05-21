@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/qlhocsinhFragment"
-        android:name="com.hoanle.solienlaccc.fragments.qlHocSinhFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qlhocsinhFragment"
         android:label="qlHocSinhFragment"
         tools:layout="@layout/fragment_qlhocsinh"/>
     <fragment
         android:id="@+id/qlthongbaoFragment"
-        android:name="com.hoanle.solienlaccc.fragments.qlThongBaoFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qlthongbaoFragment"
         android:label="qlThongBaoFragment"
         tools:layout="@layout/fragment_qlthongbao"/>
     <fragment
         android:id="@+id/qllophocFragment"
-        android:name="com.hoanle.solienlaccc.fragments.qlLopHocFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qllophocFragment"
         android:label="qlLopHocFragment"
         tools:layout="@layout/fragment_qllophoc"/>
     <fragment
