@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hoanle.solienlaccc.fragments.HocPhiFragment;
 import com.hoanle.solienlaccc.fragments.PhuHuynhFragment;
@@ -18,10 +19,15 @@ public class Login extends Activity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         setContentView(R.layout.login);
+        if(user != null) {
+            startActivity(user);
+        }
         EditText username = findViewById(R.id.edtUserName);
         EditText pass = findViewById(R.id.edtPass);
         EditText role = findViewById(R.id.edtRole);
@@ -35,27 +41,31 @@ public class Login extends Activity {
     private void Login(String username, String password){
         auth.signInWithEmailAndPassword(username, password)
                 .addOnSuccessListener(authResult -> {
-                    firestore.collection("roles").document(authResult.getUser().getUid())
-                            .get().addOnSuccessListener(documentSnapshot -> {
-                        Intent intent;
-                                switch (documentSnapshot.getString("role")) {
-                                    case "PhuHuynh":
-                                        intent = new Intent(this, HomephuhuynhActivity.class);
-                                        startActivity(intent);
-                                        break;
-                                    case "Admin":
-                                        intent = new Intent(this, HomephuhuynhActivity.class);
-                                        startActivity(intent);
-                                        break;
-                                    default:
-                                        intent = new Intent(this, HomehocsinhActivity.class);
-                                        startActivity(intent);
-                                }
-                    });
+                    FirebaseUser user = authResult.getUser();
+                    startActivity(user);
                 }).addOnFailureListener(e -> {
             Log.d("",e.getMessage());
             Toast.makeText(this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
         });
     }
-
+    private void startActivity(FirebaseUser user) {
+        firestore.collection("roles").document(user.getUid())
+                .get().addOnSuccessListener(documentSnapshot -> {
+            Intent intent;
+            switch (documentSnapshot.getString("role")) {
+                case "PhuHuynh":
+                    intent = new Intent(this, HomephuhuynhActivity.class);
+                    startActivity(intent);
+                    break;
+                case "Admin":
+                    intent = new Intent(this, HomeadminActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    intent = new Intent(this, HomehocsinhActivity.class);
+                    startActivity(intent);
+            }
+        });
+        finishAfterTransition();
+    }
 }
