@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="20"
-    tools:context=".MainActivity">
+    tools:context=".Login">
+
         <ImageView
             android:scaleType="fitXY"
             android:layout_width="match_parent"

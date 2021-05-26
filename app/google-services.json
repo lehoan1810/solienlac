@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "20547309190",
+    "project_id": "solienlac-c84f2",
+    "storage_bucket": "solienlac-c84f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20547309190:android:18b713e36f0da4d7134b07",
+        "android_client_info": {
+          "package_name": "com.hoanle.solienlaccc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20547309190-59fs6eng34lbrdk3793oh9a04sgdce5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIwqmOkNyj7Uug7PES61iZITAYWQpDrj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20547309190-59fs6eng34lbrdk3793oh9a04sgdce5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
