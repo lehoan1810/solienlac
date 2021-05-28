@@ -22,17 +22,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_namhoc"
-        android:name="com.hoanle.solienlaccc.namhoc.dsnamhoc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/listViewThongBao"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView4"
-        app:layout_constraintVertical_bias="0.155" />
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fragment_namhoc"-->
+<!--        android:name="com.hoanle.solienlaccc.namhoc.dsnamhoc"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/listViewThongBao"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/textView4"-->
+<!--        app:layout_constraintVertical_bias="0.155" />-->
 
     <ListView
         android:id="@+id/listViewThongBao"

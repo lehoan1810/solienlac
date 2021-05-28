@@ -34,6 +34,19 @@
         <action
             android:id="@+id/action_hocsinhFragment_to_tkbFragment"
             app:destination="@id/tkbFragment" />
+        <action
+            android:id="@+id/action_hocsinhFragment_to_nav_thongtincanhan"
+            app:destination="@id/nav_thongtincanhan" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_thongtincanhan"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietHocSinhFragment"
+        android:label="ChiTietHocSinhFragment"
+        tools:layout="@layout/fragment_chitiethocsinh"/>
+    <fragment
+        android:id="@+id/chiTietThongBaoFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietThongBaoFragment"
+        android:label="ChiTietThongBaoFragment"
+        tools:layout="@layout/fragment_chitietthongbao"/>
 
 </navigation>
