@@ -3,21 +3,22 @@ package com.hoanle.solienlaccc.fragments.xemdiem;
 import com.google.firebase.firestore.DocumentReference;
 
 public class XemdiemMon {
-    private DocumentReference Ref;
+    private String Id;
     private String TenMon;
     private int Hinh;
 
-    public XemdiemMon(String tenMon, int hinh) {
+    public XemdiemMon(String tenMon, String id,int hinh) {
         TenMon = tenMon;
         Hinh = hinh;
+        Id = id;
     }
 
-    public DocumentReference getRef() {
-        return Ref;
+    public String getId() {
+        return Id;
     }
 
-    public void setRef(DocumentReference ref) {
-        Ref = ref;
+    public void setId(String id) {
+        Id = id;
     }
 
     public int getHinh() {

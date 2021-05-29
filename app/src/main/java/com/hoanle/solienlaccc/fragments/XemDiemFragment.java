@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hoanle.solienlaccc.R;
+import com.hoanle.solienlaccc.fragments.thongbao.xemThongBao;
 import com.hoanle.solienlaccc.fragments.xemdiem.XemdiemMon;
 import com.hoanle.solienlaccc.fragments.xemdiem.XemdiemMonAdapter;
 
@@ -55,7 +57,18 @@ public class XemDiemFragment extends Fragment {
         String email = auth.getCurrentUser().getEmail();
         setDanhSachMonHocCuaHocSinh(email);
         listViewMonhoc.setOnItemClickListener((adapterView, view1, i, l) -> {
-            
+            ChiTietDiemFragment fragment = new ChiTietDiemFragment();
+            Bundle arguments = new Bundle();
+            XemdiemMon diem = xemdiemMons.get(i);
+            arguments.putString("TenMon",diem.getTenMon());
+            arguments.putString("Id",diem.getId());
+
+            fragment.setArguments(arguments);
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+            transaction.setReorderingAllowed(true);
+            transaction.replace(R.id.nav_host_fragment, fragment, null).addToBackStack("openDiem");
+            transaction.commit();
         });
     }
 
@@ -88,7 +101,8 @@ public class XemDiemFragment extends Fragment {
             for(DocumentReference mon: dsmon){
                 mon.get().addOnCompleteListener(task2 -> {
                     String tenMon = task2.getResult().getString("TenMon");
-                    xemdiemMons.add(new XemdiemMon(tenMon, R.drawable.monhoc));
+                    String id = task2.getResult().getId();
+                    xemdiemMons.add(new XemdiemMon(tenMon, id, R.drawable.monhoc));
                     adapter.notifyDataSetChanged();
                 });
             }
