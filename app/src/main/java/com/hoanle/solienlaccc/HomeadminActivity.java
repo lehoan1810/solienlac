@@ -43,6 +43,7 @@ public class HomeadminActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         setDrawerMemu();
     }
+
     private void setDrawerMemu() {
         navigationView.setNavigationItemSelectedListener(item -> {
             if(item.getItemId()==R.id.nav_dangxuat){

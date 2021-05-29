@@ -12,12 +12,16 @@
         tools:layout="@layout/fragment_qlhocsinh"/>
     <fragment
         android:id="@+id/qlthongbaoFragment"
-        android:name="com.hoanle.solienlaccc.fragments.qlthongbaoFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qlThongBaoFragment"
         android:label="qlThongBaoFragment"
-        tools:layout="@layout/fragment_qlthongbao"/>
+        tools:layout="@layout/fragment_qlthongbao">
+        <action
+            android:id="@+id/action_qlthongbaoFragment_to_themThongBaoFragment2"
+            app:destination="@id/themThongBaoFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/qllophocFragment"
-        android:name="com.hoanle.solienlaccc.fragments.qllophocFragment"
+        android:name="com.hoanle.solienlaccc.fragments.qlLopHocFragment"
         android:label="qlLopHocFragment"
         tools:layout="@layout/fragment_qllophoc"/>
     <fragment
@@ -35,5 +39,10 @@
             android:id="@+id/action_adminFragment_to_qllophocFragment"
             app:destination="@id/qllophocFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/themThongBaoFragment2"
+        android:name="com.hoanle.solienlaccc.fragments.ThemThongBaoFragment"
+        android:label="ThemThongBaoFragment"
+        tools:layout="@layout/fragment_addthongbao"/>
 
 </navigation>

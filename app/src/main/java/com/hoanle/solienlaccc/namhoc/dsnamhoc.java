@@ -31,7 +31,6 @@ public class dsnamhoc extends Fragment {
         editnamhoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "it works", Toast.LENGTH_SHORT).show();
                 MenuPopup();
             }
         });

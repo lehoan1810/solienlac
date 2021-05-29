@@ -1,11 +1,13 @@
 package com.hoanle.solienlaccc.fragments.thongbao;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class xemThongBao {
-    private String NgayGui;
+    private Timestamp NgayGui;
     private String NguoiGui;
     private ArrayList<DocumentReference> NguoiNhan;
     private String NoiDung;
@@ -15,7 +17,7 @@ public class xemThongBao {
     private String ThoiGian;
     private int Hinh;
 
-    public xemThongBao(String ngayGui, String nguoiGui, ArrayList<DocumentReference> nguoiNhan, String noiDung, String tieuDe) {
+    public xemThongBao(Timestamp ngayGui, String nguoiGui, ArrayList<DocumentReference> nguoiNhan, String noiDung, String tieuDe) {
         NgayGui = ngayGui;
         NguoiGui = nguoiGui;
         NguoiNhan = nguoiNhan;
@@ -56,5 +58,41 @@ public class xemThongBao {
 
     public String getNoiDung() {
         return NoiDung;
+    }
+
+    public Timestamp getNgayGui() {
+        return NgayGui;
+    }
+
+    public void setNgayGui(Timestamp NgayGui) {
+        this.NgayGui = NgayGui;
+    }
+
+    public String getNguoiGui() {
+        return NguoiGui;
+    }
+
+    public void setNguoiGui(String NguoiGui) {
+        this.NguoiGui = NguoiGui;
+    }
+
+    public ArrayList<DocumentReference> getNguoiNhan() {
+        return NguoiNhan;
+    }
+
+    public void setNguoiNhan(ArrayList<DocumentReference> NguoiNhan) {
+        this.NguoiNhan = NguoiNhan;
+    }
+
+    public void setNoiDung(String NoiDung) {
+        this.NoiDung = NoiDung;
+    }
+
+    public String getTieuDe() {
+        return TieuDe;
+    }
+
+    public void setTieuDe(String TieuDe) {
+        this.TieuDe = TieuDe;
     }
 }

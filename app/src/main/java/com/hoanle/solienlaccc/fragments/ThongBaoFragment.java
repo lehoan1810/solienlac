@@ -44,15 +44,15 @@ public class ThongBaoFragment extends Fragment {
         thongbao= new ArrayList<xemThongBao>();
         DocumentReference hocSinhRef = fireStore.collection("HocSinh").document(auth.getUid());
         fireStore.collection("ThongBao")
-                .whereArrayContains("NguoiNhan", hocSinhRef).get()
+                .whereArrayContains("nguoiNhan", hocSinhRef).get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for(DocumentSnapshot thonBao : queryDocumentSnapshots) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             sfd = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                             thongbao.add(new xemThongBao(
-                                    thonBao.getString("TieuDe"),
-                                    thonBao.getString("NoiDung"),
-                                    sfd.format(thonBao.getTimestamp("NgayGui").toDate()),
+                                    thonBao.getString("tieuDe"),
+                                    thonBao.getString("noiDung"),
+                                    sfd.format(thonBao.getTimestamp("ngayGui").toDate()),
                                     R.drawable.imgthongbao));
                         }
                     }
