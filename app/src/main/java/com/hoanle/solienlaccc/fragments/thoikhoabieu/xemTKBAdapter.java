@@ -49,7 +49,7 @@ public class xemTKBAdapter extends BaseAdapter {
             LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=layoutInflater.inflate(layout,null);
             viewHorder=new ViewHorder();
-            viewHorder.txtthu= convertView.findViewById(R.id.txtThu);
+            viewHorder.txtthu= convertView.findViewById(R.id.tv_TenMonTKB);
             viewHorder.img=convertView.findViewById(R.id.imgtkb);
             convertView.setTag(viewHorder);
         }

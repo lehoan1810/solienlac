@@ -54,7 +54,7 @@ public class HomehocsinhActivity extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.nav_thongtincanhan:
-                    navController.navigate(R.id.action_hocsinhFragment_to_nav_thongtincanhan);
+                    navController.navigate(R.id.nav_thongtincanhan);
                     drawer.closeDrawer(GravityCompat.START);
                     break;
             }

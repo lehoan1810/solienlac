@@ -15,10 +15,9 @@ import com.hoanle.solienlaccc.fragments.HocPhiFragment;
 import com.hoanle.solienlaccc.fragments.PhuHuynhFragment;
 
 public class Login extends Activity {
-
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-
+    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +31,13 @@ public class Login extends Activity {
         EditText pass = findViewById(R.id.edtPass);
         EditText role = findViewById(R.id.edtRole);
 
-        Button login = findViewById(R.id.btnLogin);
+        login = findViewById(R.id.btnLogin);
         login.setOnClickListener(view -> {
             Login(username.getText().toString(),pass.getText().toString());
         });
 
     }
+
     private void Login(String username, String password){
         auth.signInWithEmailAndPassword(username, password)
                 .addOnSuccessListener(authResult -> {
@@ -48,24 +48,29 @@ public class Login extends Activity {
             Toast.makeText(this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
         });
     }
+
     private void startActivity(FirebaseUser user) {
         firestore.collection("roles").document(user.getUid())
-                .get().addOnSuccessListener(documentSnapshot -> {
-            Intent intent;
-            switch (documentSnapshot.getString("role")) {
-                case "PhuHuynh":
-                    intent = new Intent(this, HomephuhuynhActivity.class);
-                    startActivity(intent);
-                    break;
-                case "Admin":
-                    intent = new Intent(this, HomeadminActivity.class);
-                    startActivity(intent);
-                    break;
-                default:
-                    intent = new Intent(this, HomehocsinhActivity.class);
-                    startActivity(intent);
-            }
+            .get().addOnCompleteListener(task -> {
+                if(task.isSuccessful()) {
+                    login.setEnabled(false);
+                    Intent intent;
+                    switch (task.getResult().getString("role")) {
+                        case "PhuHuynh":
+                            intent = new Intent(this, HomephuhuynhActivity.class);
+                            startActivity(intent);
+                            break;
+                        case "Admin":
+                            intent = new Intent(this, HomeadminActivity.class);
+                            startActivity(intent);
+                            break;
+                        default:
+                            intent = new Intent(this, HomehocsinhActivity.class);
+                            startActivity(intent);
+                    }
+                    login.setEnabled(true);
+                    finishAfterTransition();
+                }
         });
-        finishAfterTransition();
     }
 }

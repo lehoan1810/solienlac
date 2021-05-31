@@ -19,7 +19,11 @@
         android:id="@+id/tkbFragment"
         android:name="com.hoanle.solienlaccc.fragments.TKBFragment"
         android:label="hsTKBFragment"
-        tools:layout="@layout/fragment_tkb"/>
+        tools:layout="@layout/fragment_tkb">
+        <action
+            android:id="@+id/action_tkbFragment_to_chiTietTKBFragment2"
+            app:destination="@id/chiTietTKBFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/hocsinhFragment"
         android:name="com.hoanle.solienlaccc.fragments.HocSinhFragment"
@@ -48,5 +52,9 @@
         android:name="com.hoanle.solienlaccc.fragments.ChiTietThongBaoFragment"
         android:label="ChiTietThongBaoFragment"
         tools:layout="@layout/fragment_chitietthongbao"/>
+    <fragment
+        android:id="@+id/chiTietTKBFragment2"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietTKBFragment"
+        android:label="ChiTietTKBFragment" />
 
 </navigation>

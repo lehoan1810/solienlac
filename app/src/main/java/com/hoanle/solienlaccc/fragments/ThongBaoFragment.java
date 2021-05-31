@@ -33,6 +33,7 @@ public class ThongBaoFragment extends Fragment {
     FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
     SimpleDateFormat sfd;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

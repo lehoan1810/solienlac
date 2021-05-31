@@ -14,7 +14,11 @@
         android:id="@+id/TKBFragment"
         android:name="com.hoanle.solienlaccc.fragments.TKBFragment"
         android:label="TKBFragment"
-        tools:layout="@layout/fragment_hocphi"/>
+        tools:layout="@layout/fragment_hocphi">
+        <action
+            android:id="@+id/action_TKBFragment_to_chiTietTKBFragment"
+            app:destination="@id/chiTietTKBFragment" />
+    </fragment>
     <fragment
         android:id="@+id/thongBaoFragment"
         android:name="com.hoanle.solienlaccc.fragments.ThongBaoFragment"
@@ -42,6 +46,34 @@
         <action
             android:id="@+id/action_phuHuynhFragment_to_hocPhiFragment"
             app:destination="@id/hocPhiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chiTietDiemFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietDiemFragment"
+        android:label="ChiTietDiemFragment" >
+        <action
+            android:id="@+id/action_chiTietDiemFragment_to_chiTietHocSinhFragment"
+            app:destination="@id/chiTietHocSinhFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chiTietHocSinhFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietHocSinhFragment"
+        android:label="ChiTietHocSinhFragment" />
+    <fragment
+        android:id="@+id/chiTietThongBaoFragment2"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietThongBaoFragment"
+        android:label="ChiTietThongBaoFragment" >
+        <action
+            android:id="@+id/action_chiTietThongBaoFragment2_to_chiTietHocSinhFragment"
+            app:destination="@id/chiTietHocSinhFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chiTietTKBFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietTKBFragment"
+        android:label="ChiTietTKBFragment" >
+        <action
+            android:id="@+id/action_chiTietTKBFragment_to_chiTietHocSinhFragment"
+            app:destination="@id/chiTietHocSinhFragment" />
     </fragment>
 
 </navigation>
