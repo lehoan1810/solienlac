@@ -14,7 +14,11 @@
         android:id="@+id/thongbaoFragment"
         android:name="com.hoanle.solienlaccc.fragments.ThongBaoFragment"
         android:label="hsThongBaoFragment"
-        tools:layout="@layout/fragment_thongbao"/>
+        tools:layout="@layout/fragment_thongbao">
+        <action
+            android:id="@+id/action_thongbaoFragment_to_chiTietThongBaoFragment"
+            app:destination="@id/chiTietThongBaoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tkbFragment"
         android:name="com.hoanle.solienlaccc.fragments.TKBFragment"

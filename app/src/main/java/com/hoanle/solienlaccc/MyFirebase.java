@@ -22,13 +22,26 @@ public class MyFirebase {
     }
 
     public Task<DocumentSnapshot> getCurrentHocSinh() {
-        return firestore.collection("HocSinh").document(auth.getCurrentUser().getUid()).get();
+        return getUserRole().continueWithTask(task -> {
+            if(task.getResult().equals("HocSinh"))
+                return firestore.collection("HocSinh").document(auth.getCurrentUser().getUid()).get();
+            else if(task.getResult().equals("PhuHuynh")){
+                return firestore.collection("PhuHuynh").document(auth.getCurrentUser().getUid()).get()
+                        .continueWithTask(task2 -> (task2.getResult().getDocumentReference("HocSinh").get()));
+            }
+            return null;
+        });
     }
 
     public Task<DocumentSnapshot> getHocSinhFromParent() {
         return firestore.collection("PhuHuynh").document(auth.getCurrentUser().getUid()).get()
                 .continueWith(new getHocSinhCuaPhuHuynh())
                 .continueWithTask(new getHocSinhFromReference());
+    }
+
+    public Task<String> getUserRole(){
+        return firestore.collection("roles").document(auth.getCurrentUser().getUid()).get()
+                .continueWith(task -> task.getResult().getString("role"));
     }
 
     public String getHocSinhId() {

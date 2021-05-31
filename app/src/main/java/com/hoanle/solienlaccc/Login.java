@@ -1,6 +1,7 @@
 package com.hoanle.solienlaccc;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,15 +19,21 @@ public class Login extends Activity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     Button login;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         setContentView(R.layout.login);
+
+
         if(user != null) {
+            dialog = ProgressDialog.show(this, "",
+                    "Đăng nhâp...", true);
             startActivity(user);
         }
+
         EditText username = findViewById(R.id.edtUserName);
         EditText pass = findViewById(R.id.edtPass);
         EditText role = findViewById(R.id.edtRole);
@@ -69,6 +76,7 @@ public class Login extends Activity {
                             startActivity(intent);
                     }
                     login.setEnabled(true);
+                    dialog.show();
                     finishAfterTransition();
                 }
         });

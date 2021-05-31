@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hoanle.solienlaccc.R;
 import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class qlhocsinhFragment extends Fragment {
     ListView listView;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
@@ -36,12 +39,14 @@ public class qlhocsinhFragment extends Fragment {
 
         list = new ArrayList<String>();
 
-        list.add("hoàn");
-        list.add("quốc");
-        list.add("việt");
+        firestore.collection("HocSinh").get().addOnCompleteListener(task -> {
+            for(DocumentSnapshot hocsinh : task.getResult().getDocuments()){
+                list.add(hocsinh.getString("HoTen"));
+            }
+            adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
+            listView.setAdapter(adapter);
+        });
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
-        listView.setAdapter((adapter));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -54,6 +59,7 @@ public class qlhocsinhFragment extends Fragment {
                 return false;
             }
         });
+
         //Nhấn vào listItem
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
