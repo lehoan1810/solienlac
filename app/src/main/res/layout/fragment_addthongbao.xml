@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -23,13 +23,33 @@
             android:textStyle="bold"
             android:textSize="30dp"
             android:textColor="@color/black"/>
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_lophoc"
-            android:name="com.hoanle.solienlaccc.lophoc.dslophoc"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/wid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Người nhận:"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="16dp" />
 
+            <Spinner
+                android:id="@+id/spinnerLop"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown" />
 
+            <Spinner
+                android:id="@+id/spinnerMSHS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,9 +68,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginVertical="10dp"
+                android:background="@drawable/edittext_border"
                 android:ems="10"
                 android:inputType="text"
-                android:background="@drawable/edittext_border"/>
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -62,12 +84,13 @@
             <EditText
                 android:id="@+id/editTextTextMultiLine"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:ems="10"
+                android:layout_height="197dp"
                 android:layout_marginVertical="10dp"
+                android:background="@drawable/edittext_border"
+                android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-                android:background="@drawable/edittext_border"/>
+                android:padding="10dp" />
 
 
         </LinearLayout>
@@ -106,4 +129,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

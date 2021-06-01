@@ -76,7 +76,6 @@ public class Login extends Activity {
                             startActivity(intent);
                     }
                     login.setEnabled(true);
-                    dialog.show();
                     finishAfterTransition();
                 }
         });

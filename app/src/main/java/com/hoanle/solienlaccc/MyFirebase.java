@@ -44,6 +44,15 @@ public class MyFirebase {
                 .continueWith(task -> task.getResult().getString("role"));
     }
 
+    public static Task<QuerySnapshot> getAllLop(){
+        return firestore.collection("LopHoc").get();
+    }
+
+    public static Task<QuerySnapshot> getHocSinhOfLop(String MaLop) {
+        DocumentReference ref = firestore.collection("LopHoc").document(MaLop);
+        return firestore.collection("HocSinh").whereEqualTo("Lop",ref).get();
+    }
+
     public String getHocSinhId() {
         return auth.getCurrentUser().getUid();
     }

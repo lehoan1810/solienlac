@@ -80,8 +80,8 @@ public class xemThongBao {
         return NguoiNhan;
     }
 
-    public void setNguoiNhan(ArrayList<DocumentReference> NguoiNhan) {
-        this.NguoiNhan = NguoiNhan;
+    public void setNguoiNhan(ArrayList<DocumentReference> nguoiNhan) {
+        NguoiNhan = nguoiNhan;
     }
 
     public void setNoiDung(String NoiDung) {

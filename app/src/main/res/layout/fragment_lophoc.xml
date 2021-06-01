@@ -1,34 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_dslop"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="36dp"
+    android:gravity="center"
     android:orientation="horizontal"
     android:weightSum="10">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2.2"
-        android:text="Người nhận:"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="16dp" />
 
-    <Spinner
-        android:id="@+id/spinnerLop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="2.2"
-        android:spinnerMode="dropdown"/>
-    <Spinner
-        android:id="@+id/spinnerMSHS"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_weight="2.2"
-        android:spinnerMode="dropdown"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -44,5 +44,9 @@
         android:name="com.hoanle.solienlaccc.fragments.ThemThongBaoFragment"
         android:label="ThemThongBaoFragment"
         tools:layout="@layout/fragment_addthongbao"/>
+    <fragment
+        android:id="@+id/chiTietThongBaoFragmentAdmin"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietThongBaoFragment"
+        android:label="ChiTietThongBaoFragment" />
 
 </navigation>
