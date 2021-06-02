@@ -5,13 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="20"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
         android:text="Học Phí"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -37,7 +39,8 @@
     <ListView
         android:id="@+id/listViewHocPhi"
         android:layout_width="347dp"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
+        android:layout_weight="10"
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +49,13 @@
         app:layout_constraintVertical_bias="0.113" />
 
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/tv_hpTotal"
+        android:textColor="@android:color/holo_red_light"
         android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
         android:text="Tổng tiền: 1000000" />
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -27,7 +27,6 @@ public class Login extends Activity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         setContentView(R.layout.login);
 
-
         if(user != null) {
             dialog = ProgressDialog.show(this, "",
                     "Đăng nhâp...", true);

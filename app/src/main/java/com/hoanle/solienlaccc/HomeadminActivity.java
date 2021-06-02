@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,6 +28,8 @@ public class HomeadminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homeadmin);
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);

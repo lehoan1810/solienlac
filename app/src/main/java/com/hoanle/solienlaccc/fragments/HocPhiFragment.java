@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HocPhiFragment extends Fragment {
-
+     int total=0;
     ListView listViewHocPhi;
     TextView txtTotal;
     XemHocPhiAdapter adapter;
@@ -108,7 +108,8 @@ public class HocPhiFragment extends Fragment {
                     String id = task2.getResult().getId();
                     xemHocPhis.add(new XemHocPhi(id, tenMon, hocphi));
                     adapter.notifyDataSetChanged();
-                    txtTotal.setText(1 + "");
+                    total+=Integer.parseInt(hocphi);
+                    txtTotal.setText("Tổng tiền: "+total+"");
                 });
             }
             return dsmon;
