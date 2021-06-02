@@ -62,7 +62,7 @@ public class ChiTietDiemFragment extends Fragment {
                         String tiet = "";
                         for (String diem : hour) {
                             tiet += diem;
-                            Tiet.setText(muoilam);
+                            Tiet.setText(tiet);
                             tiet += ", ";
                         }
                         String giuaky = doc.getString("GiuaKy");

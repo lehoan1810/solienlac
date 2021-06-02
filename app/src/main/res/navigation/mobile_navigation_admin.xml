@@ -4,12 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/adminFragment">
-
+    <fragment android:id="@+id/chiTietMonhocFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietMonHocFragment"
+        android:label="Chitietmonhoc"
+        tools:layout="@layout/fragment_chi_tiet_mon_hoc"/>
+    <fragment
+        android:id="@+id/chiTietHocSinhFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietHocSinhFragment"
+        android:label="ChitiethocSinh"
+        tools:layout="@layout/fragment_chitiethocsinh"
+        />
     <fragment
         android:id="@+id/qlhocsinhFragment"
         android:name="com.hoanle.solienlaccc.fragments.qlhocsinhFragment"
         android:label="qlHocSinhFragment"
-        tools:layout="@layout/fragment_qlhocsinh"/>
+        tools:layout="@layout/fragment_qlhocsinh">
+        <action android:id="@+id/action_qllophocFragment_ChitiethocsinhFragment"
+            app:destination="@+id/chiTietHocSinhFragment" />
+    </fragment>
     <fragment
         android:id="@+id/qlthongbaoFragment"
         android:name="com.hoanle.solienlaccc.fragments.qlThongBaoFragment"
@@ -23,7 +35,11 @@
         android:id="@+id/qllophocFragment"
         android:name="com.hoanle.solienlaccc.fragments.qlLopHocFragment"
         android:label="qlLopHocFragment"
-        tools:layout="@layout/fragment_qllophoc"/>
+        tools:layout="@layout/fragment_qllophoc">
+        <action android:id="@+id/action_qllophocFragment_ChitietMonhocFragment"
+            app:destination="@+id/chiTietMonhocFragment"/>
+
+    </fragment>
     <fragment
         android:id="@+id/adminFragment"
         android:name="com.hoanle.solienlaccc.fragments.AdminFragment"
