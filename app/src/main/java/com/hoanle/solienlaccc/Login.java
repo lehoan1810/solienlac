@@ -39,7 +39,11 @@ public class Login extends Activity {
 
         login = findViewById(R.id.btnLogin);
         login.setOnClickListener(view -> {
-            Login(username.getText().toString(),pass.getText().toString());
+            if(username.getText().toString().length() > 0 & pass.getText().toString().length() > 0)
+            {
+                Login(username.getText().toString(),pass.getText().toString());
+            }else Toast.makeText(this, "Nhập thông tin vào ô trống", Toast.LENGTH_SHORT).show();
+
         });
 
     }
