@@ -33,6 +33,11 @@
             app:destination="@id/chiTietTKBFragment" />
     </fragment>
     <fragment
+        android:id="@+id/hocPhiFragment"
+        android:name="com.hoanle.solienlaccc.fragments.HocPhiFragment"
+        android:label="HocPhiFragment"
+        tools:layout="@layout/fragment_hocphi"/>
+    <fragment
         android:id="@+id/hocsinhFragment"
         android:name="com.hoanle.solienlaccc.fragments.HocSinhFragment"
         android:label="HocSinhFragment"
@@ -49,6 +54,9 @@
         <action
             android:id="@+id/action_hocsinhFragment_to_nav_thongtincanhan"
             app:destination="@id/nav_thongtincanhan" />
+        <action
+            android:id="@+id/action_hocsinhFragment_to_hocPhiFragment"
+            app:destination="@id/hocPhiFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_thongtincanhan"
