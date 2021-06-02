@@ -16,11 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hoanle.solienlaccc.R;
+import com.hoanle.solienlaccc.fragments.thoikhoabieu.xemTKB;
 
 import org.w3c.dom.Document;
 
@@ -44,7 +47,6 @@ public class qlLopHocFragment extends Fragment {
 
         Init(view);
         setChonNamHoc(view);
-
         return view;
     }
 
@@ -67,8 +69,28 @@ public class qlLopHocFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 tenmon=list.get(position);
                 Navigation.findNavController(view).navigate(R.id.chiTietMonhocFragment);
-
             }
+        });
+    }
+
+    public void filter(String namhoc, String hocki){
+        firestore.collection("MonHoc").whereEqualTo("NamHoc", namhoc)
+                .whereEqualTo("HocKy", hocki).get().addOnCompleteListener(task -> {
+            for(DocumentSnapshot hocsinh : task.getResult().getDocuments()){
+                list.add(hocsinh.getString("TenMon"));
+            }
+            adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
+            lstmonhoc.setAdapter(adapter);
+        });
+    }
+    public void filterNam(String namhoc){
+        firestore.collection("MonHoc").whereEqualTo("NamHoc", namhoc)
+                .get().addOnCompleteListener(task -> {
+            for(DocumentSnapshot hocsinh : task.getResult().getDocuments()){
+                list.add(hocsinh.getString("TenMon"));
+            }
+            adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
+            lstmonhoc.setAdapter(adapter);
         });
     }
 
@@ -94,6 +116,8 @@ public class qlLopHocFragment extends Fragment {
                         namhoc = "2020-2021";
                         break;
                 }
+                list.clear();
+                filter(namhoc,hocki);
                 return false;
             }
         });
@@ -118,6 +142,8 @@ public class qlLopHocFragment extends Fragment {
                         hocki = "2";
                         break;
                 }
+                list.clear();
+                filter(namhoc,hocki);
                 return false;
             }
         });

@@ -17,7 +17,7 @@ public class dsRole extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        editRole=findViewById(R.id.edtRole);
+        //editRole=findViewById(R.id.edtRole);
         editRole.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

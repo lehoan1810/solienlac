@@ -35,7 +35,7 @@ public class Login extends Activity {
 
         EditText username = findViewById(R.id.edtUserName);
         EditText pass = findViewById(R.id.edtPass);
-        EditText role = findViewById(R.id.edtRole);
+        //EditText role = findViewById(R.id.edtRole);
 
         login = findViewById(R.id.btnLogin);
         login.setOnClickListener(view -> {

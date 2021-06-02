@@ -40,25 +40,26 @@ public class ChiTietTKBFragment extends Fragment {
         tv_thu = view.findViewById(R.id.tv_TKBThu);
 
         Bundle arguments = getArguments();
+        String Thu = arguments.getString("Thu");
+        String Mon = arguments.getString("Mon");
         ArrayList<DocumentReference> mons = (ArrayList<DocumentReference>)arguments.getSerializable("Mons");
-        String thu = String.valueOf(arguments.getInt("Thu"));
-        tv_thu.setText("Thứ "+ thu);
+        tv_thu.setText("Thứ "+Thu);
         for(DocumentReference mon : mons){
             mon.get().addOnCompleteListener(task -> {
-               if(task.isSuccessful()){
-                   if(task.getResult().get("Thu").equals(thu)){
-                       LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                       View v = vi.inflate(R.layout.dong_chitiettkb, null);
+                if(task.isSuccessful()){
+                    if(task.getResult().get("Thu").equals(Thu)){
+                        LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        View v = vi.inflate(R.layout.dong_chitiettkb, null);
 
-                       TextView tenMon = v.findViewById(R.id.tv_TenMonTKB);
-                       tenMon.setText(task.getResult().getString("TenMon"));
+                        TextView tenMon = v.findViewById(R.id.tv_TenMonTKB);
+                        tenMon.setText(task.getResult().getString("TenMon"));
 
-                       TextView tiet = v.findViewById(R.id.tv_TietHoc);
-                       tiet.setText("Tiết: " + task.getResult().getString("Tiet"));
+                        TextView tiet = v.findViewById(R.id.tv_TietHoc);
+                        tiet.setText("Tiết: " + task.getResult().getString("Tiet"));
 
-                       linearLayout.addView(v);
-                   }
-               }
+                        linearLayout.addView(v);
+                    }
+                }
             });
         }
         return view;

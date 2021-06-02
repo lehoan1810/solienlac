@@ -59,45 +59,7 @@
             android:textSize="20sp" />
 
 
-        <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1.5"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:id="@+id/txtRole"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3.5"
-                android:height="35dp"
-                android:text="Chọn Role"
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtRole"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_weight="6"
-                android:height="20dp"
-                android:background="@drawable/textbox_outline"
-                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
-                android:focusable="false"
-                android:inputType="none"
-                android:padding="2dp"
-                android:textAlignment="center"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <Button
+    <Button
             android:id="@+id/btnLogin"
             android:layout_width="150dp"
             android:layout_height="0dp"
