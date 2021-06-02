@@ -18,11 +18,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hoanle.solienlaccc.R;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import java.util.ArrayList;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class qlhocsinhFragment extends Fragment {
+    public static String Ten;
     SearchView searchView;
     ListView listView;
     ArrayList<String> list;
@@ -33,7 +37,7 @@ public class qlhocsinhFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_qlhocsinh, container, false);
-
+        NavController navController = Navigation.findNavController(container);
         searchView = root.findViewById(R.id.search_bar);
         listView = root.findViewById(R.id.list_item);
 
@@ -64,7 +68,9 @@ public class qlhocsinhFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                    Ten=list.get(position);
+//                navController.navigate(R.id.action_qllophocFragment_ChitiethocsinhFragment);
+                Navigation.findNavController(view).navigate(R.id.chiTietHocSinhFragment);
             }
         });
         return root;

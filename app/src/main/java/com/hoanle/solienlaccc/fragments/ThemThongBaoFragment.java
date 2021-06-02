@@ -1,14 +1,18 @@
 package com.hoanle.solienlaccc.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,7 +40,7 @@ import java.util.Calendar;
 import static com.google.firebase.messaging.Constants.MessagePayloadKeys.SENDER_ID;
 
 public class ThemThongBaoFragment extends Fragment {
-    Button Them;
+    Button Them,Huy;
     EditText NoiDung;
     EditText TieuDe;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -57,14 +61,14 @@ public class ThemThongBaoFragment extends Fragment {
         Them = view.findViewById(R.id.buttonAddNotiSend);
         TieuDe = view.findViewById(R.id.editTextNotiTitle);
         NoiDung = view.findViewById(R.id.editTextTextMultiLine);
-
+        Huy = view.findViewById(R.id.buttonDeleteNotiCancel);
         setSpinner(view);
 
         Them.setOnClickListener(view1 -> {
             Timestamp NgayGui = Timestamp.now();
             String NguoiGui = auth.getCurrentUser().getEmail();
             DocumentReference hsRef = firestore.collection("HocSinh")
-                    .document(((HocSinh)nguoinhan.getSelectedItem()).getId());
+                    .document(((HocSinh) nguoinhan.getSelectedItem()).getId());
             ArrayList<DocumentReference> hss = new ArrayList<>();
             hss.add(hsRef);
             xemThongBao thongBao = new xemThongBao(NgayGui, NguoiGui, hss
@@ -87,9 +91,43 @@ public class ThemThongBaoFragment extends Fragment {
             });
 
         });
+        Huy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogThongbao();
+            }
+        });
         return view;
     }
+    private void DialogThongbao(){
+        final Dialog dialog=new Dialog(getActivity());
 
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_thongbao);
+        dialog.setCanceledOnTouchOutside(false);
+
+        TextView btnhuy=dialog.findViewById(R.id.btnCanceldialog);
+        TextView btnDongy=dialog.findViewById(R.id.btnAccept);
+
+        btnhuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        btnDongy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TieuDe.setText("");
+                NoiDung.setText("");
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+        Window window = dialog.getWindow();
+        window.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+    }
     private void setSpinner(View view) {
         lop = view.findViewById(R.id.spinnerLop);
         nguoinhan = view.findViewById(R.id.spinnerMSHS);

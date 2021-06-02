@@ -54,6 +54,23 @@ public class ChiTietHocSinhFragment extends Fragment {
                 }
             }
         });
+
+        fireStore.collection("HocSinh").whereEqualTo("HoTen", qlhocsinhFragment.Ten).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                for(DocumentSnapshot hocSinh : task.getResult().getDocuments()) {
+                    studentEmail.setText(hocSinh.getString("Email"));
+                    studentName.setText(hocSinh.getString("HoTen"));
+                    hocSinh.getDocumentReference("Lop").get().addOnSuccessListener(documentSnapshot -> {
+                        studentClassroom.setText(documentSnapshot.getString("TenLop"));
+                    });
+                    studentPhone.setText(hocSinh.getString("SDT"));
+                    hocSinh.getDocumentReference("PhuHuynh").get().addOnSuccessListener(documentSnapshot -> {
+                        studentParent.setText(documentSnapshot.getString("HoTen"));
+                    });
+                    studentId.setText(hocSinh.getString("Email"));
+                }
+            }
+        });
         return root;
     }
 }

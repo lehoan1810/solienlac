@@ -25,6 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.hoanle.solienlaccc.MyFirebase;
 import com.hoanle.solienlaccc.R;
 import com.hoanle.solienlaccc.fragments.thongbao.xemThongBao;
 import com.hoanle.solienlaccc.fragments.xemdiem.XemdiemMon;
@@ -36,6 +37,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XemDiemFragment extends Fragment {
+    EditText editnamhoc;
+    EditText edithocki;
+    String namhoc="";
+    String hocki="";
     ListView listViewMonhoc;
     XemdiemMonAdapter adapter;
     List<XemdiemMon> xemdiemMons;
@@ -47,6 +52,7 @@ public class XemDiemFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_xem_diem, container, false);
         Init(root);
+        setChonNamHoc(root);
         return root;
     }
     private void Init(View view){
@@ -72,18 +78,95 @@ public class XemDiemFragment extends Fragment {
         });
     }
 
+    private void setChonNamHoc(View view) {
+        editnamhoc=view.findViewById(R.id.edtNam);
+        edithocki=view.findViewById(R.id.edtHocki);
+        editnamhoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MenuPopup();
+            }
+        });
+        edithocki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MenuHockiPopup();
+            }
+        });
+    }
+    private void MenuPopup()
+    {
+        PopupMenu popupMenu=new PopupMenu(getContext(),editnamhoc);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_namhoc,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.namhoc1:
+                        editnamhoc.setText("2018-2019");
+                        namhoc = "2018-2019";
+                        xemdiemMons.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                    case R.id.namhoc2:
+                        editnamhoc.setText("2019-2020");
+                        namhoc = "2019-2020";
+                        xemdiemMons.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                    case R.id.namhoc3:
+                        editnamhoc.setText("2020-2021");
+                        namhoc = "2020-2021";
+                        xemdiemMons.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void MenuHockiPopup()
+    {
+        PopupMenu popupMenu=new PopupMenu(getContext(),edithocki);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_hocki,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hk1:
+                        edithocki.setText("1");
+                        hocki = "1";
+                        xemdiemMons.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+
+                        break;
+                    case R.id.hk2:
+                        edithocki.setText("2");
+                        hocki = "2";
+                        xemdiemMons.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
     private void setDanhSachMonHocCuaHocSinh(String email){
-        Task<QuerySnapshot> getHocSinh = fireStore.collection("HocSinh").whereEqualTo("Email",email)
-                .get();
+        MyFirebase fb = MyFirebase.getInstance();
+        Task<DocumentSnapshot> getHocSinh = fb.getCurrentHocSinh();
         getHocSinh.continueWith(new getLop())
                 .continueWithTask(new getDanhSachMon())
                 .continueWith(new setAdapter());
     }
 
-    public class getLop implements Continuation<QuerySnapshot, DocumentReference> {
+    public class getLop implements Continuation<DocumentSnapshot, DocumentReference> {
         @Override
-        public DocumentReference then(@NonNull Task<QuerySnapshot> hocSinh) throws Exception {
-            return hocSinh.getResult().getDocuments().get(0).getDocumentReference("Lop");
+        public DocumentReference then(@NonNull Task<DocumentSnapshot> hocSinh) throws Exception {
+            return hocSinh.getResult().getDocumentReference("Lop");
         }
     }
 
@@ -98,12 +181,16 @@ public class XemDiemFragment extends Fragment {
         @Override
         public ArrayList<DocumentReference> then(@NonNull Task<DocumentSnapshot> task) throws Exception {
             ArrayList<DocumentReference> dsmon = (ArrayList<DocumentReference>) task.getResult().get("DanhSachMonHoc");
+
             for(DocumentReference mon: dsmon){
                 mon.get().addOnCompleteListener(task2 -> {
-                    String tenMon = task2.getResult().getString("TenMon");
-                    String id = task2.getResult().getId();
-                    xemdiemMons.add(new XemdiemMon(tenMon, id, R.drawable.monhoc));
-                    adapter.notifyDataSetChanged();
+                    if(task2.getResult().getString("NamHoc").equals(namhoc) &&
+                    task2.getResult().getString("HocKy").equals(hocki)) {
+                        String tenMon = task2.getResult().getString("TenMon");
+                        String id = task2.getResult().getId();
+                        xemdiemMons.add(new XemdiemMon(tenMon, id, R.drawable.monhoc));
+                        adapter.notifyDataSetChanged();
+                    }
                 });
             }
             return dsmon;
