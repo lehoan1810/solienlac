@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.hoanle.solienlaccc.MyFirebase;
 import com.hoanle.solienlaccc.R;
 import com.hoanle.solienlaccc.fragments.thongbao.xemThongBao;
 import com.hoanle.solienlaccc.fragments.xemdiem.XemdiemMon;
@@ -57,33 +59,27 @@ public class XemDiemFragment extends Fragment {
         String email = auth.getCurrentUser().getEmail();
         setDanhSachMonHocCuaHocSinh(email);
         listViewMonhoc.setOnItemClickListener((adapterView, view1, i, l) -> {
-            ChiTietDiemFragment fragment = new ChiTietDiemFragment();
             Bundle arguments = new Bundle();
             XemdiemMon diem = xemdiemMons.get(i);
             arguments.putString("TenMon",diem.getTenMon());
             arguments.putString("Id",diem.getId());
 
-            fragment.setArguments(arguments);
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-
-            transaction.setReorderingAllowed(true);
-            transaction.replace(R.id.nav_host_fragment, fragment, null).addToBackStack("openDiem");
-            transaction.commit();
+            Navigation.findNavController(view).navigate(R.id.chiTietDiemFragment, arguments);
         });
     }
 
     private void setDanhSachMonHocCuaHocSinh(String email){
-        Task<QuerySnapshot> getHocSinh = fireStore.collection("HocSinh").whereEqualTo("Email",email)
-                .get();
+        MyFirebase fb = MyFirebase.getInstance();
+        Task<DocumentSnapshot> getHocSinh = fb.getCurrentHocSinh();
         getHocSinh.continueWith(new getLop())
                 .continueWithTask(new getDanhSachMon())
                 .continueWith(new setAdapter());
     }
 
-    public class getLop implements Continuation<QuerySnapshot, DocumentReference> {
+    public class getLop implements Continuation<DocumentSnapshot, DocumentReference> {
         @Override
-        public DocumentReference then(@NonNull Task<QuerySnapshot> hocSinh) throws Exception {
-            return hocSinh.getResult().getDocuments().get(0).getDocumentReference("Lop");
+        public DocumentReference then(@NonNull Task<DocumentSnapshot> hocSinh) throws Exception {
+            return hocSinh.getResult().getDocumentReference("Lop");
         }
     }
 

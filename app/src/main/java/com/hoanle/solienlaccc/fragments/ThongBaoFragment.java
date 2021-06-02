@@ -12,11 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.hoanle.solienlaccc.MyFirebase;
 import com.hoanle.solienlaccc.R;
 import com.hoanle.solienlaccc.fragments.thongbao.xemThongBao;
 import com.hoanle.solienlaccc.fragments.thongbao.xemThongBaoAdapter;
@@ -43,38 +45,37 @@ public class ThongBaoFragment extends Fragment {
     }
     private void Init(View view){
         thongbao= new ArrayList<xemThongBao>();
-        DocumentReference hocSinhRef = fireStore.collection("HocSinh").document(auth.getUid());
-        fireStore.collection("ThongBao")
-                .whereArrayContains("nguoiNhan", hocSinhRef).get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for(DocumentSnapshot thonBao : queryDocumentSnapshots) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            sfd = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                            thongbao.add(new xemThongBao(
-                                    thonBao.getString("tieuDe"),
-                                    thonBao.getString("noiDung"),
-                                    sfd.format(thonBao.getTimestamp("ngayGui").toDate()),
-                                    R.drawable.imgthongbao));
+        MyFirebase fb = MyFirebase.getInstance();
+        fb.getCurrentHocSinh().addOnCompleteListener(task -> {
+            DocumentReference hocSinhRef = fireStore.collection("HocSinh").document(task.getResult().getId());
+            fireStore.collection("ThongBao")
+                    .whereArrayContains("nguoiNhan", hocSinhRef).get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        for(DocumentSnapshot thonBao : queryDocumentSnapshots) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                sfd = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                thongbao.add(new xemThongBao(
+                                        thonBao.getString("tieuDe"),
+                                        thonBao.getString("noiDung"),
+                                        sfd.format(thonBao.getTimestamp("ngayGui").toDate()),
+                                        R.drawable.imgthongbao));
+                            }
                         }
-                    }
-                    listViewThongBao=view.findViewById(R.id.listViewThongBao);
-                    adapter = new xemThongBaoAdapter(getActivity(),R.layout.dong_thongbao, thongbao);
-                    listViewThongBao.setAdapter(adapter);
-                    listViewThongBao.setOnItemClickListener((adapterView, view1, i, l) -> {
-                        ChiTietThongBaoFragment fragment = new ChiTietThongBaoFragment();
-                        Bundle arguments = new Bundle();
-                        xemThongBao tb = thongbao.get(i);
-                        arguments.putString("NgayGui",tb.getThoiGian());
-                        arguments.putString("NguoiGui","");
-                        arguments.putString("NoiDung",tb.getNoiDung());
-                        arguments.putString("TieuDe",tb.getThongBao());
+                        listViewThongBao=view.findViewById(R.id.listViewThongBao);
+                        adapter = new xemThongBaoAdapter(getActivity(),R.layout.dong_thongbao, thongbao);
+                        listViewThongBao.setAdapter(adapter);
+                        listViewThongBao.setOnItemClickListener((adapterView, view1, i, l) -> {
+                            ChiTietThongBaoFragment fragment = new ChiTietThongBaoFragment();
+                            Bundle arguments = new Bundle();
+                            xemThongBao tb = thongbao.get(i);
+                            arguments.putString("NgayGui",tb.getThoiGian());
+                            arguments.putString("NguoiGui","");
+                            arguments.putString("NoiDung",tb.getNoiDung());
+                            arguments.putString("TieuDe",tb.getThongBao());
 
-                        fragment.setArguments(arguments);
-                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-
-                        transaction.setReorderingAllowed(true);
-                        transaction.replace(R.id.nav_host_fragment, fragment, null).addToBackStack("openThongBao");
-                        transaction.commit();
+                            fragment.setArguments(arguments);
+                            Navigation.findNavController(view).navigate(R.id.chiTietThongBaoFragment, arguments);
+                        });
                     });
         });
 

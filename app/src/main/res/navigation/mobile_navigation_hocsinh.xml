@@ -9,7 +9,11 @@
         android:id="@+id/xemdiemFragment"
         android:name="com.hoanle.solienlaccc.fragments.XemDiemFragment"
         android:label="hsXemDiemFragment"
-        tools:layout="@layout/fragment_xem_diem"/>
+        tools:layout="@layout/fragment_xem_diem">
+        <action
+            android:id="@+id/action_xemdiemFragment_to_chiTietDiemFragment2"
+            app:destination="@id/chiTietDiemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/thongbaoFragment"
         android:name="com.hoanle.solienlaccc.fragments.ThongBaoFragment"
@@ -26,7 +30,7 @@
         tools:layout="@layout/fragment_tkb">
         <action
             android:id="@+id/action_tkbFragment_to_chiTietTKBFragment2"
-            app:destination="@id/chiTietTKBFragment2" />
+            app:destination="@id/chiTietTKBFragment" />
     </fragment>
     <fragment
         android:id="@+id/hocsinhFragment"
@@ -57,8 +61,12 @@
         android:label="ChiTietThongBaoFragment"
         tools:layout="@layout/fragment_chitietthongbao"/>
     <fragment
-        android:id="@+id/chiTietTKBFragment2"
+        android:id="@+id/chiTietTKBFragment"
         android:name="com.hoanle.solienlaccc.fragments.ChiTietTKBFragment"
         android:label="ChiTietTKBFragment" />
+    <fragment
+        android:id="@+id/chiTietDiemFragment"
+        android:name="com.hoanle.solienlaccc.fragments.ChiTietDiemFragment"
+        android:label="ChiTietDiemFragment" />
 
 </navigation>

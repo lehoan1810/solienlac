@@ -56,12 +56,11 @@ public class TKBFragment extends Fragment {
         adapter = new xemTKBAdapter(getActivity(),R.layout.dong_tkb, thoikhoabieu);
         listViewTKB.setAdapter(adapter);
         listViewTKB.setOnItemClickListener((adapterView, view1, i1, l) -> {
-
             Bundle bundle = new Bundle();
             bundle.putSerializable("Mons", mons);
             bundle.putInt("Thu",i1+2);
 
-            Navigation.findNavController(view).navigate(R.id.chiTietTKBFragment2, bundle);
+            Navigation.findNavController(view).navigate(R.id.chiTietTKBFragment, bundle);
         });
 
         myFirebase.getCurrentHocSinh()

@@ -60,7 +60,7 @@
         android:name="com.hoanle.solienlaccc.fragments.ChiTietHocSinhFragment"
         android:label="ChiTietHocSinhFragment" />
     <fragment
-        android:id="@+id/chiTietThongBaoFragment2"
+        android:id="@+id/chiTietThongBaoFragment"
         android:name="com.hoanle.solienlaccc.fragments.ChiTietThongBaoFragment"
         android:label="ChiTietThongBaoFragment" >
         <action

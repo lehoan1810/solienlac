@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.hoanle.solienlaccc.MyFirebase;
 import com.hoanle.solienlaccc.R;
 
 import java.util.ArrayList;
@@ -42,8 +43,12 @@ public class ChiTietDiemFragment extends Fragment {
         String Id = arguments.getString("Id");
         String Name = arguments.getString("TenMon");
         name.setText(Name);
-        DocumentReference monRef = firestore.collection("MonHoc").document(Id);
-        firestore.collection("Diem").whereEqualTo("Mon", monRef).get()
+        MyFirebase fb = MyFirebase.getInstance();
+        fb.getCurrentHocSinh().addOnCompleteListener(task -> {
+            DocumentReference hocSinhRef = task.getResult().getReference();
+            DocumentReference monRef = firestore.collection("MonHoc").document(Id);
+            firestore.collection("Diem").whereEqualTo("Mon", monRef)
+                .whereEqualTo("HocSinh", hocSinhRef).get()
                 .addOnSuccessListener(documentSnapshots -> {
                     for(DocumentSnapshot doc : documentSnapshots) {
                         ArrayList<String> fifteen = (ArrayList<String>) doc.get("15Phut");
@@ -69,6 +74,7 @@ public class ChiTietDiemFragment extends Fragment {
                         TrungBinh.setText(avg);
                     }
 
+                });
         });
 
         return view;
