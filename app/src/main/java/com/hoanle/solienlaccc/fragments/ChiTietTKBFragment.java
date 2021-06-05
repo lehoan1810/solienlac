@@ -36,12 +36,14 @@ public class ChiTietTKBFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chitiettkb, container, false);
-        linearLayout = view.findViewById(R.id.ll_ChiTietTKB);
-        tv_thu = view.findViewById(R.id.tv_TKBThu);
+
+        linearLayout        = view.findViewById(R.id.ll_ChiTietTKB);
+        tv_thu              = view.findViewById(R.id.tv_TKBThu);
 
         Bundle arguments = getArguments();
         String Thu = arguments.getString("Thu");
         String Mon = arguments.getString("Mon");
+
         ArrayList<DocumentReference> mons = (ArrayList<DocumentReference>)arguments.getSerializable("Mons");
         tv_thu.setText("Thứ "+Thu);
         for(DocumentReference mon : mons){

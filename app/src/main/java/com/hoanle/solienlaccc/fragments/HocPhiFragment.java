@@ -2,9 +2,12 @@ package com.hoanle.solienlaccc.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +33,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HocPhiFragment extends Fragment {
-     int total=0;
+    int count = 0;
+    int total=0;
+
     ListView listViewHocPhi;
-    TextView txtTotal;
+    TextView txtTotal, txtThutien, txtNotien;
     XemHocPhiAdapter adapter;
     List<XemHocPhi> xemHocPhis;
     FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
+
+    EditText editnamhoc;
+    EditText edithocki;
+    String namhoc="";
+    String hocki="";
 
     @Nullable
     @Override
@@ -46,31 +56,103 @@ public class HocPhiFragment extends Fragment {
 
         Init(view);
 
+        setChonNamHoc(view);
 
         return view;
     }
 
     private void Init(View view){
-        xemHocPhis = new ArrayList<XemHocPhi>();
-        //xemHocPhis.add(new XemHocPhi("1", "Toan", "10000000"));
-        //xemHocPhis.add(new XemHocPhi("2", "Toan", "10000000"));
-        //xemHocPhis.add(new XemHocPhi("3", "Toan", "10000000"));
-        //xemHocPhis.add(new XemHocPhi("4", "Toan", "10000000"));
-        listViewHocPhi=view.findViewById(R.id.listViewHocPhi);
-        txtTotal = view.findViewById(R.id.tv_hpTotal);
-        adapter = new XemHocPhiAdapter(getActivity(),R.layout.dong_hocphi, xemHocPhis);
-        listViewHocPhi.setAdapter(adapter);
-        String email = auth.getCurrentUser().getEmail();
-        Toast.makeText(getActivity(), email, Toast.LENGTH_SHORT).show();
-        setDanhSachMonHocCuaHocSinh(email);
-        /*listViewHocPhi.setOnItemClickListener((adapterView, view1, i, l) -> {
-            Bundle arguments = new Bundle();
-            XemHocPhi diem = xemHocPhis.get(i);
-            arguments.putString("TenMon",diem.getTenMon());
-            arguments.putString("Id",diem.getId());
+        xemHocPhis      = new ArrayList<XemHocPhi>();
 
-            Navigation.findNavController(view).navigate(R.id.chiTietDiemFragment, arguments);
-        });*/
+        listViewHocPhi      =   view.findViewById(R.id.listViewHocPhi);
+        txtTotal            =   view.findViewById(R.id.tv_hpTotal);
+        txtThutien          =   view.findViewById(R.id.tv_hpThu);
+        txtNotien           =   view.findViewById(R.id.tv_hpNo);
+
+        adapter         = new XemHocPhiAdapter(getActivity(),R.layout.dong_hocphi, xemHocPhis);
+        listViewHocPhi.setAdapter(adapter);
+        String email    = auth.getCurrentUser().getEmail();
+
+        setDanhSachMonHocCuaHocSinh(email);
+    }
+    // My new code
+    private void setChonNamHoc(View view) {
+        editnamhoc          =(EditText) view.findViewById(R.id.edtNam);
+        edithocki           =(EditText) view.findViewById(R.id.edtHocki);
+
+        editnamhoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MenuPopup();
+            }
+        });
+
+        edithocki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MenuHockiPopup();
+            }
+        });
+    }
+    private void MenuPopup()
+    {
+        PopupMenu popupMenu=new PopupMenu(getContext(),editnamhoc);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_namhoc,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.namhoc1:
+                        editnamhoc.setText("2018-2019");
+                        namhoc = "2018-2019";
+                        xemHocPhis.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                    case R.id.namhoc2:
+                        editnamhoc.setText("2019-2020");
+                        namhoc = "2019-2020";
+                        xemHocPhis.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                    case R.id.namhoc3:
+                        editnamhoc.setText("2020-2021");
+                        namhoc = "2020-2021";
+                        xemHocPhis.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void MenuHockiPopup()
+    {
+        PopupMenu popupMenu=new PopupMenu(getContext(),edithocki);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_hocki,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hk1:
+                        edithocki.setText("1");
+                        hocki = "1";
+                        xemHocPhis.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+
+                        break;
+                    case R.id.hk2:
+                        edithocki.setText("2");
+                        hocki = "2";
+                        xemHocPhis.clear();
+                        setDanhSachMonHocCuaHocSinh("");
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 
     private void setDanhSachMonHocCuaHocSinh(String email){
@@ -98,18 +180,29 @@ public class HocPhiFragment extends Fragment {
     public class setAdapter implements  Continuation<DocumentSnapshot, ArrayList<DocumentReference>> {
         @Override
         public ArrayList<DocumentReference> then(@NonNull Task<DocumentSnapshot> task) throws Exception {
-            //long count = 0;
+            xemHocPhis.clear();
+            count = 0;
+            total = 0;
             ArrayList<DocumentReference> dsmon = (ArrayList<DocumentReference>) task.getResult().get("DanhSachMonHoc");
             for(DocumentReference mon: dsmon){
                 mon.get().addOnCompleteListener(task2 -> {
-                    String tenMon = task2.getResult().getString("TenMon");
-                    String hocphi = task2.getResult().getString("Tien");
-                    //long count = Long.parseLong(hocphi);
-                    String id = task2.getResult().getId();
-                    xemHocPhis.add(new XemHocPhi(id, tenMon, hocphi));
-                    adapter.notifyDataSetChanged();
-                    total+=Integer.parseInt(hocphi);
-                    txtTotal.setText("Tổng tiền: "+total+"");
+                    if(task2.getResult().getString("NamHoc").equals(namhoc) &&
+                            task2.getResult().getString("HocKy").equals(hocki)) {
+                        String tenMon       = task2.getResult().getString("TenMon");
+                        String hocphi       = task2.getResult().getString("Tien");
+                        String dongtien     = task2.getResult().getString("DongTien");
+                        String id           = task2.getResult().getId();
+
+                        xemHocPhis.add(new XemHocPhi(id, tenMon, hocphi));
+                        adapter.notifyDataSetChanged();
+
+                        total       +=Integer.parseInt(hocphi);
+                        count       += Integer.parseInt(dongtien);
+
+                        txtTotal.setText("Tổng tiền: "+total+"");
+                        txtThutien.setText("Đã Đóng: " + count);
+                        txtNotien.setText("Còn Nợ: " + (total - count));
+                    }
                 });
             }
             return dsmon;

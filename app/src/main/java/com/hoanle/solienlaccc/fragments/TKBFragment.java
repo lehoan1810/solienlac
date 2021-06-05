@@ -47,7 +47,9 @@ public class TKBFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_tkb, container, false);
         Init(root);
+
         setChonNamHoc(root);
+
         return root;
     }
 
@@ -196,6 +198,7 @@ public class TKBFragment extends Fragment {
                 mon.get().addOnCompleteListener(task2 -> {
                     if(task2.getResult().getString("NamHoc").equals(namhoc) &&
                             task2.getResult().getString("HocKy").equals(hocki)) {
+
                         String thu = task2.getResult().getString("Thu");
                         thoikhoabieu.add(new xemTKB(thu, R.drawable.imgthu));
                         adapter.notifyDataSetChanged();
